@@ -1,0 +1,64 @@
+package Daniellebassan;
+
+import java.util.HashSet;
+import java.util.Set;
+
+import exceptions.ReadingBookException;
+
+public class ReadingBook extends Book {
+	
+	private static Set<String> languages = new HashSet<String>();
+	private String language;
+	private String type; //1. adult book 2.children book 
+	
+	public ReadingBook(String bookName, String auth,int type){
+		super(bookName, auth);
+		boolean found = false;
+
+		if(type==1)this.type="Adult book";
+		else if(type==2)this.type="Children book";
+		//handle exception if another number was entered
+		
+	}
+	
+	//TEST
+	public String toString() {
+		String res="The languages in the set are: \n";
+		for(String i:languages) {
+			res+=i+"\n";
+		}
+		res+="\n";
+		
+		res+="Book name: "+this.getBookName();
+		res+="\nBook author: "+this.getAuthor();
+		res+="\nBook language: "+language;
+		res+="\nBook type: "+type;
+		
+		return res;
+	}
+	
+	public void isLanguageExist(String l) throws ReadingBookException{
+		boolean found = false;
+		for(String lang : languages) {
+			if(lang.equals(language))found=true;
+		}		
+		if(found)this.language = language;
+		else {
+			throw new ReadingBookException ("ERROR - Language not found!");
+		}
+	}
+	
+	public void addLanguage(String l) {
+		languages.add(l);
+		language = l;
+	}
+	
+	
+
+}
+
+/*
+
+ * check if language is valid
+ * adults or children
+ */ 
